@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Studio | Catálogo de Maquillaje y Cejas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcf8f5;
+            color: #3f3531;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #f0e2dd;
+            padding: 30px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        header h1 {
+            color: #b5835a;
+            font-size: 2.4rem;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+
+        header p {
+            color: #8c7870;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #4a3b32;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #e5989b;
+            margin: 12px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(168, 120, 100, 0.08);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            border: 1px solid #f5ede8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(229, 152, 155, 0.25);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #b5835a;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            color: #2b1e19;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #6e5d55;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #fbf8f6;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b5835a;
+        }
+
+        .btn-booking {
+            background-color: #25D366;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-booking:hover {
+            background-color: #128C7E;
+            transform: scale(1.03);
+        }
+
+        footer {
+            background-color: #2d221e;
+            color: #ede2dd;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        footer .credits {
+            color: #e5989b;
+            font-size: 0.75rem;
+            margin-top: 15px;
+            opacity: 0.8;
+        }
+        
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: #ffffff !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        /* Color de WhatsApp (Verde oficial) */
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .btn-tiktok {
+            background-color: #000000;
+        }
+
+        .btn-facebook {
+            background-color: #1877F2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Beauty Studio</h1>
+        <p>Maquillaje Profesional & Diseño de Cejas</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Nuestro Catálogo de Servicios</h2>
+
+        <div class="catalog-grid">
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlpoN9uj1g0xbjZw5Ng6vTeCreB8OT2Wpi90zglOFXw&s=10" alt="Diseño de Cejas con Henna" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Cejas</span>
+                    <h3 class="product-title">visagismo</h3>
+                    <p class="product-description">Dale color, definición y volumen a tus cejas con nuestro sombreado semipermanente de henna natural. Ideal para rellenar espacios vacíos y lucir unas cejas perfectamente maquilladas todos los días. (Duración: 7 a 12 días).</p>
+                    <div class="product-footer">
+                        <span class="product-price">$10.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Dise%C3%B1o%20de%20Cejas%20%2B%20Henna" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHvd7F3yX9cW4IPTjps1Z5m2rts-zqHwiIO81Hk6epKQ&s=10" alt="Laminado de Cejas" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Cejas</span>
+                    <h3 class="product-title">Sombreado con Henna Orgánica</h3>
+                    <p class="product-description">Dale color, definición y volumen a tus cejas con nuestro sombreado semipermanente de henna natural. Ideal para rellenar espacios vacíos y lucir unas cejas perfectamente maquilladas todos los días. (Duración: 7 a 12 días).</p>
+                    <div class="product-footer">
+                        <span class="product-price">$10.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Laminado%20de%20Cejas" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3ZlhjQFLnAC1PUDJ5ykP0HuBeDj4yf8hdsQPw5O83GzK1dCbTwZWMyQU&s=10" alt="Depilación Facial" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">cejas</span>
+                    <h3 class="product-title">Depilación Facial con Cera Profesional</h3>
+                    <p class="product-description">Luce una piel limpia, sedosa y libre de vello. Utilizamos ceras profesionales con fórmulas delicadas que extraen el vello desde la raíz sin maltratar la piel de tu rostro. Un servicio ideal para cejas, bozo y rostro completo.</p>
+                    <div class="product-footer">
+                        <span class="product-price">$45.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Depilacion%20Facial" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiqqRNJToFWpxZqvQUuuOTvGwRXuMWtQZ_-JDb0I-CnQ&s=10" alt="Maquillaje Quinceañeras" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Maquillaje</span>
+                    <h3 class="product-title">Maquillaje para Quinceañeras</h3>
+                    <p class="product-description">Luce radiante y espectacular en tu día especial. Diseñamos un look personalizado que resalta tu frescura y belleza juvenil, utilizando técnicas profesionales de alta durabilidad y productos a prueba de fotos para que luzcas perfecta durante toda la noche.</p>
+                    <div class="product-footer">
+                        <span class="product-price">$60.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Maquillaje%20de%20Quinceanera" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXWhvx81YPeA6Tx6D2dsi0gBvLjw_nNj8pHXChHYd0tWS1sLxF96Lky3w&s=10" alt="Maquillaje de Novia" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Maquillaje</span>
+                    <h3 class="product-title">Maquillaje de Novia (Soft & Glam)</h3>
+                    <p class="product-description">El maquillaje más importante de tu vida, diseñado para hacerte brillar. Creamos un look elegante, sofisticado y atemporal que resalta tu belleza natural. Utilizamos técnicas de alta definición y productos premium a prueba de agua y lágrimas para que luzcas impecable de principio a fin.</p>
+                    <div class="product-footer">
+                        <span class="product-price">$60.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Maquillaje%20de%20Novia" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuBBbbilPt6v6FPmpv_XmJ7EtN5cOUATUVHtKMjayGkQ&s=10" alt="Maquillaje de Ojos" class="product-image">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Maquillaje</span>
+                    <h3 class="product-title">Maquillaje de Ojos (Efecto Halo Eye)</h3>
+                    <p class="product-description">Destaca tu mirada con una de las técnicas más elegantes del maquillaje. Creamos una transición de sombras impecable con un punto de luz central satinado que aporta una increíble profundidad y brillo a tus ojos. Ideal para eventos nocturnos o sesiones de fotos donde quieras ser el centro de atención.</p>
+                    <div class="product-footer">
+                        <span class="product-price">$60.00</span>
+                        <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20apartar%20una%20cita%20para%20Halo%20Eye" target="_blank" class="btn-booking">
+                            Agendar Cita
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div> 
+    </div> 
+
+    <footer style="text-align: center; padding: 40px 20px; background-color: #2d221e;">
+        <p style="color: #ede2dd; margin-bottom: 20px; font-size: 0.95rem;">¿Tienes dudas? Escríbenos o visítanos en nuestras redes oficiales:</p>
+        
+        <div class="social-links" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+            <a href="https://wa.me/584122905960?text=Hola%20Glow%20Studio!%20Quiero%20hacer%20una%20consulta" target="_blank" class="btn-social btn-whatsapp">
+                WhatsApp
+            </a>
+            <a href="https://www.instagram.com/_beauty.studio.24_/" target="_blank" class="btn-social btn-instagram">
+                Instagram
+            </a>
+            <a href="https://www.tiktok.com/@beauty.studio45?_r=1&_t=ZS-985uBy8XJXF" target="_blank" class="btn-social btn-tiktok">
+                TikTok
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61591746518619" target="_blank" class="btn-social btn-facebook">
+                Facebook
+            </a>
+        </div>
+        
+        <p class="credits" style="color: #e5989b; font-size: 0.75rem; margin-top: 15px; opacity: 0.8;">&copy; 2026 Beauty Studio. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
